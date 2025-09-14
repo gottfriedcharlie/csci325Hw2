@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "fstream": "cpp",
+    "__node_handle": "cpp",
+    "stdexcept": "cpp",
+    "string": "cpp"
+  }
+}
