@@ -3,14 +3,13 @@
 #include <string>
 #include <fstream>
 #include <iterator>
-#include <filesystem>
 
 using namespace std;
 
 //This function takes the PlainText and key and ciphers the plaintext
 void encrypt (const string& plainText, const string& key){
     //cout << "function encrypt called";
-    ifstream input("plainText.txt");
+    ifstream input(plainText);
     string contents((istreambuf_iterator<char>(input)), istreambuf_iterator<char>());
 
     string noSpacePT;
@@ -45,7 +44,7 @@ void encrypt (const string& plainText, const string& key){
 //This function takes the ciphertext and key and deCiphers it
 void decrypt (const string& cipherText, const string& key){
     //cout << "function dencrypt called";
-    ifstream input("cipherText.txt");
+    ifstream input(cipherText);
     string contents((istreambuf_iterator<char>(input)), istreambuf_iterator<char>());
 
 
@@ -84,26 +83,23 @@ int main () {
         cout << "Would you like to Encrypt (e) or Decrypt (d)? ";
         cin >> a;
         if (a == 'e'){
-            string plainText;
+            string plainText;// = ("plainKnownKey.txt"); //change this to desired file
             string key;
             cout << "Enter the name of the file you would like to Encrypt: ";
             cin >> plainText;
-            ifstream inputFile(plainText);
-            inputFile.close();
             cout << "Enter the key to Encrypt: ";
             cin >> key;
             encrypt(plainText ,key);   
 
             //Encrypt
         } else if(a == 'd'){
-            string cipherText;
+            string cipherText;// = ("cipherKnownKey.txt"); //change this to desired file
             string key;
             cout << "Enter the name of the file you would like to Decrypt: ";
             cin >> cipherText;
-            ifstream inputFile(cipherText);
-            ofstream outputFile("cipherKnownKeyTest.txt");
             cout << "Enter the key to Encrypt: ";
             cin >> key;
+            decrypt(cipherText ,key);
             //Decrypt
         } else {
             cout << "Select either Encrypt or Decrypt!\n";
@@ -117,7 +113,6 @@ int main () {
         if (a == 'e'){
             string plainText;
             string key;
-            char x;
             cout << "Enter the plaintext: ";
             getline(cin >> ws, plainText); //removes whitespace that causing getline to skip
             ofstream inputFile("plainText.txt");
@@ -130,7 +125,6 @@ int main () {
         } else if(a == 'd'){
             string cipherText;
             string key;
-            char x;
             cout << "Enter the cipherText: ";
             getline(cin >> ws, cipherText); //removes whitespace that causing getline to skip
             ofstream inputFile("cipherText.txt");
